@@ -1,8 +1,8 @@
 # MetaboliteNER
 This repository contains the codes and models of a metabolite named entity recognition (NER) project. The main features you can find in this repository are as follows: 
 
-* An automatically annotated metabolomics training corpus (`TrainingSet.txt`, `TrainingSetAnnot.tsv`);
-* A manually annotated metabolomics test corpus (`GoldStandard.txt`, `GoldStandardAnnot.tsv`);
+* An automatically annotated metabolomics training corpus (`TrainingSet.txt`, `TrainingSetAnnot.tsv`) in the [Corpus](Corpus) directory;
+* A manually annotated metabolomics test corpus (`GoldStandard.txt`, `GoldStandardAnnot.tsv`) in the [Corpus](Corpus) directory;
 * A rule-based annotation pipeline that automatically annotate ([AutoCORPus](https://github.com/omicsNLP/Auto-CORPus)-processed) publications (`generate_corpus.py`);
 * MetaboListem, a machine learning model that recognises metabolite names (`metabolistem_model.py`), adapted from a chemical NER model named [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/);
 * TABoLiSTM, a [BERT](https://arxiv.org/abs/1810.04805)-based machine learning model that recognises metabolite names (`tabolistem_model.py`), adapted from MetaboListem.
@@ -28,7 +28,7 @@ spacy == 3.0.6
 ## MetaboListem
 MetaboListem is a machine-learning based metabolite NER algorithm, adapted from a chemical NER model called [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/). 
 ### Using MetaboListem
-This repository includes a trained MetaboListem model in `MetaboListemModel` folder. You can import and load our MetaboListem model as follows:
+This repository includes a trained MetaboListem model in the in the [Models](Models) folder. You can import and load our MetaboListem model as follows:
 ```
 import metabolistem_model
 json_path = 'PATH/TO/metabolistem.json'
@@ -158,7 +158,7 @@ The training set files are generated automatically with the rule-based annotatio
 python generate_corpus.py -b PATH/TO/PMC -t PATH/TO/SAVEDIR -m PATH/TO/METABOLITEDICT -n OUTPUTNAME -r REGEX -e EXCLUSION
 ```
 which requires 6 arguments: 
-* `-b`: Directory of PMC json files processed by AutoCORPus
+* `-b`: Directory of PMC json files processed by [AutoCORPus](https://github.com/omicsNLP/Auto-CORPus)
 * `-t`: Output directory
 * `-n`: Output filename
 * `-m`: Filepath to a file storing a list of metabolite names for exact dictionary matching (e.g. `MetaboliteNames.txt`)
