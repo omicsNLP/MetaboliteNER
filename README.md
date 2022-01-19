@@ -1,9 +1,9 @@
 # MetaboliteNER
 This repository contains the codes and models of a metabolite named entity recognition (NER) project. The main features you can find in this repository are as follows: 
 
-* An automatically annotated metabolome-wide association studies（MWAS) corpus (`TrainingSet.txt`, `TrainingSetAnnot.tsv`);
-* A manually annotated MWAS corpus (`GoldStandard.txt`, `GoldStandardAnnot.tsv`);
-* A rule-based annotation pipeline that automatically annotate (AutoCORPus-processed) publications (`generate_corpus.py`);
+* An automatically annotated metabolomics training corpus (`TrainingSet.txt`, `TrainingSetAnnot.tsv`);
+* A manually annotated metabolomics test corpus (`GoldStandard.txt`, `GoldStandardAnnot.tsv`);
+* A rule-based annotation pipeline that automatically annotate ([AutoCORPus](https://github.com/omicsNLP/Auto-CORPus)-processed) publications (`generate_corpus.py`);
 * MetaboListem, a machine learning model that recognises metabolite names(`metabolistem_model.py`), adapted from a chemical NER model named ChemListem;
 * TABoLiSTM, a BERT-based machine learning model that recognises metabolite names (`tabolistem_model.py`), adapted from MetaboListem.
 
@@ -26,7 +26,7 @@ spacy == 3.0.6
 ```
 
 ## MetaboListem
-MetaboListem is a machine-learning based metabolite NER algorithm, adapted from a chemical NER model called ChemListem. 
+MetaboListem is a machine-learning based metabolite NER algorithm, adapted from a chemical NER model called [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/). 
 ### Using MetaboListem
 This repository includes a trained MetaboListem model in `MetaboListemModel` folder. You can import and load our MetaboListem model as follows:
 ```
@@ -40,7 +40,7 @@ mm.load(json_path,model_path)
 
 Then you can process your text by, e.g., 
 ```
-text='Glucose, glutamine and lactate are the most mentioned metabolites in cancer studies! '
+text='Glucose, glutamine and lactate are the most frequently mentioned metabolites in cancer studies. '
 mm.process(text)
 ```
 which would return a list:
@@ -55,19 +55,19 @@ The items in the output list are tuples with format `(start_idx, end_idx, metabo
 
 Similarly, you can process a batch of texts by calling 
 ```
-texts=['Text1 contains 1-methyl-6,7-dihydroxy-1,2,3,4-tetrahydroisoquinoline, and', 
-       'Morphine and hippuric acid in Text2']
+texts=['We found that 1-methyl-6,7-dihydroxy-1,2,3,4-tetrahydroisoquinoline,', 
+       'Morphine and hippuric acid were higher in the disease group.']
 mm.batchprocess(texts)
 ```
 which results
 ```
-[[(15, 68, '1-methyl-6,7-dihydroxy-1,2,3,4-tetrahydroisoquinoline')], 
+[[(14, 68, '1-methyl-6,7-dihydroxy-1,2,3,4-tetrahydroisoquinoline')], 
  [(0, 8, 'Morphine'), (13, 26, 'hippuric acid')]]
 ```
 that is, a list of lists where each list corresponds to the entity recognition output of each sentence. 
 
 ### Training MetaboListem
-Before training your own MetaboListem model with our architecture, it is recommended to obtain the 6B 300d pre-trained word embeddings from GloVe (https://nlp.stanford.edu/projects/glove/); you can get it by downloading `glove.6B.zip` and unzipping `glove.6B.300d.txt`. Albeit being recommended, the word embedding file is optional and you could proceed without it. 
+Before training your own MetaboListem model with our architecture, it is recommended to obtain the 6B 300d pre-trained word embeddings from [GloVe](https://nlp.stanford.edu/projects/glove/); you can get it by downloading `glove.6B.zip` and unzipping `glove.6B.300d.txt`. Albeit being recommended, the word embedding file is optional and you could proceed without it. 
 
 The MetaboListem model can be trained like the following example: 
 ```
@@ -134,10 +134,10 @@ where the arguments of `tm.train` are
 * `runname`: Part of the output filenames.
 
 ## Dataset
-The data used in the study consists of open access MWAS publications from PubMed Central (n=1218). Sentences in the corpus are excerpted from Abstract, Method, Result, and Discussion sections of these publications and processed in a rule-based fashion with `generate_corpus.py`.
+The data used in the study consists of Open Access metabolomics publications from PubMed Central (n=1,218). Sentences in the corpus are excerpted from Abstract, Method, Result, and Discussion sections of these publications and processed in a rule-based fashion with `generate_corpus.py`.
 
 #### Dataset structure
-The MWAS dataset provided here comprises two files, namely 
+The metabolomics dataset provided here comprises two files, namely 
 * `TrainingSet.txt` containing sentences that mention at least one metabolite
 * `TrainingSetAnnot.tsv` containing the positions of the metabolites and the metabolites themselves
 
