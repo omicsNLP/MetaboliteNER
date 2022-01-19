@@ -4,8 +4,8 @@ This repository contains the codes and models of a metabolite named entity recog
 * An automatically annotated metabolomics training corpus (`TrainingSet.txt`, `TrainingSetAnnot.tsv`);
 * A manually annotated metabolomics test corpus (`GoldStandard.txt`, `GoldStandardAnnot.tsv`);
 * A rule-based annotation pipeline that automatically annotate ([AutoCORPus](https://github.com/omicsNLP/Auto-CORPus)-processed) publications (`generate_corpus.py`);
-* MetaboListem, a machine learning model that recognises metabolite names(`metabolistem_model.py`), adapted from a chemical NER model named ChemListem;
-* TABoLiSTM, a BERT-based machine learning model that recognises metabolite names (`tabolistem_model.py`), adapted from MetaboListem.
+* MetaboListem, a machine learning model that recognises metabolite names (`metabolistem_model.py`), adapted from a chemical NER model named [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/);
+* TABoLiSTM, a [BERT](https://arxiv.org/abs/1810.04805)-based machine learning model that recognises metabolite names (`tabolistem_model.py`), adapted from MetaboListem.
 
 
 ## Dependencies
@@ -78,7 +78,7 @@ mm.train(textfile,annotfile,glovefile,runname)
 where the arguments of `mm.train` are:
 * `textfile`: the filename of the training text file - e.g. "TrainingSet.txt"
 * `annotfile`: the filename of the training annotation file - e.g. "TrainingSetAnnot.tsv"
-* `glovefile`: None, or the filename of the glove file - e.g. "glove.6B.300d.txt"
+* `glovefile`: None, or the filename of the GloVe file - e.g. "glove.6B.300d.txt"
 * `runname`: Part of the output filenames.
 
 
@@ -134,7 +134,7 @@ where the arguments of `tm.train` are
 * `runname`: Part of the output filenames.
 
 ## Dataset
-The data used in the study consists of Open Access metabolomics publications from PubMed Central (n=1,218). Sentences in the corpus are excerpted from Abstract, Method, Result, and Discussion sections of these publications and processed in a rule-based fashion with `generate_corpus.py`.
+The data used in the study consists of Open Access metabolomics publications (n=1,218) from PubMed Central (PMC). Sentences in the corpus are excerpted from Abstract, Method, Result, and Discussion sections of these publications and processed in a rule-based fashion with `generate_corpus.py`.
 
 #### Dataset structure
 The metabolomics dataset provided here comprises two files, namely 
@@ -150,7 +150,7 @@ PMC2538910	R01008	0	10	Citrulline
 PMC2538910	R01008	15	24	ornithine
 PMC2538910	R01008	26	30	urea
 ```
-where `PMC2538910` is the PMC id of the source article, and `R01008` is the sentence id. The sentence id has three parts: for example in `R01008`, `R` means the Result section, `01` the second subsection and `008` the ninth identified sentence. 
+where `PMC2538910` is the PMC identifier of the source article, and `R01008` is the sentence identifier. The sentence id has three parts: for example in `R01008`, `R` means the Result section, `01` the second subsection and `008` the ninth identified sentence. 
 
 #### Generating dataset
 The training set files are generated automatically with the rule-based annotation pipeline `generate_corpus.py`. To use this script, you can type in command lines:
@@ -165,4 +165,4 @@ which requires 6 arguments:
 * `-r`: Filepath to a file storing a list of regular expressions for entity recognition (e.g. `RegexList_RuleBasedAnnotation.txt`)
 * `-e`: Filepath to a file storing a list of regular expressions to exclude unwanted entities (e.g. `ExclusionList_RuleBasedAnnotation.txt`)
 
-The metabolite names here (`MetaboliteNames.txt`) are taken from the human metabolome database (HMDB). 
+The metabolite names here (`MetaboliteNames.txt`) were downloaded from the [Human Metabolome Database](https://hmdb.ca/downloads) (HMDB). 
