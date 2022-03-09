@@ -67,7 +67,7 @@ which results
 that is, a list of lists where each list corresponds to the entity recognition output of each sentence. 
 
 ### Training MetaboListem
-Before training your own MetaboListem model with our architecture, it is recommended to obtain the 6B 300d pre-trained word embeddings from [GloVe](https://nlp.stanford.edu/projects/glove/); you can get it by downloading `glove.6B.zip` and unzipping `glove.6B.300d.txt`. Albeit being recommended, the word embedding file is optional and you could proceed without it. 
+Before training your own MetaboListem model with our architecture, it is recommended to obtain the 6B 300d pre-trained word embeddings from [GloVe](https://nlp.stanford.edu/projects/glove/); you can get it by downloading `glove.6B.zip` and unzipping `glove.6B.300d.txt`. Albeit being recommended, the word embedding file is optional and you could proceed without it. Other files (words.txt) can be found in the [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/) repository.
 
 The MetaboListem model can be trained like the following example: 
 ```
@@ -99,7 +99,7 @@ TABoLiSTM is a model adapted from MetaboListem above; in essence, the main diffe
 
 Applying TABoLiSTM models follows a very similar process as MetaboListem. 
 
-The first step is to import and to load the model:
+The first step is to import and to load the model (available on [zenodo](https://doi.org/10.5281/zenodo.6340001)):
 ```
 import tabolistem_model
 json_path='PATH/TO/tabolistem.json'
