@@ -3,6 +3,7 @@ This repository contains the codes and models of a metabolite named entity recog
 
 * An automatically annotated metabolomics training corpus (`TrainingSet.txt`, `TrainingSetAnnot.tsv`) in the [Corpus](Corpus) directory;
 * A manually annotated metabolomics test corpus (`GoldStandard.txt`, `GoldStandardAnnot.tsv`) in the [Corpus](Corpus) directory;
+* An automatically annotated metabolomics corpus (`MetabolomicsCorpus.txt`, `MetabolomicsCorpusAnnot.tsv`) in the [Corpus](Corpus) directory (which comprises with all TrainingSet data and the automatically annotated results of the test set);
 * A rule-based annotation pipeline that automatically annotate ([AutoCORPus](https://github.com/omicsNLP/Auto-CORPus)-processed) publications (`generate_corpus.py`);
 * MetaboListem, a machine learning model that recognises metabolite names (`metabolistem_model.py`), adapted from a chemical NER model named [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/);
 * TABoLiSTM, a [BERT](https://arxiv.org/abs/1810.04805)-based machine learning model that recognises metabolite names (`tabolistem_model.py`), adapted from MetaboListem.
