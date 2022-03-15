@@ -11,8 +11,7 @@ import pandas as pd
 
 class CorpusReader(object):
     """
-    Reads, tokenises and locates entities in training data. Splits the
-    data into two parts with ratio training:test = 0.85:0.15.
+    Reads, tokenises and locates entities in training data. 
 
     Members:
     trainseqs - train sequences
@@ -41,7 +40,6 @@ class CorpusReader(object):
         self.tosobie = True
 
         self.trainseqs = {}
-        self.testseqs = {}
         
         self.max_seq_len=max_seq_len
 
@@ -55,28 +53,11 @@ class CorpusReader(object):
         annot_df = pd.read_csv(annot_file, encoding="utf-8-sig", sep='\t',
                                names=['corpus', 'section',  'start', 'end', 'metabolite'])
 
-        print('Splitting dataset into train:test=0.85:0.15 with random seed {}...'.format(seed))
-        corpus_list = list(
-            pd.Series(list(set(corpus_df.corpus))).sample(frac=0.85))
-        train_df = corpus_df[corpus_df.corpus.apply(lambda s:s in corpus_list)]
-
-        test_df = corpus_df.drop(train_df.index)
-
-        print('Split into {}:{} sentences'.format(
-            train_df.shape[0], test_df.shape[0]))
-
         print('Processing train data...')
         timer = time.time()
-        self.trainseqs = self.to_bioes(train_df, annot_df)
+        self.trainseqs = self.to_bioes(corpus_df, annot_df)
         pd.DataFrame(self.trainseqs).to_csv('TrainSeqs.txt', header=False,
                                             encoding='utf_8_sig', index=False, sep='\t')
-        print('Elapsed in {}'.format(str(time.time()-timer)))
-
-        print('Processing test data...')
-        timer = time.time()
-        self.testseqs = self.to_bioes(test_df, annot_df)
-        pd.DataFrame(self.testseqs).to_csv('TestSeqs.txt', header=False,
-                                           encoding='utf_8_sig', index=False, sep='\t')
         print('Elapsed in {}'.format(str(time.time()-timer)))
 
     def str_to_seq(self, s):
