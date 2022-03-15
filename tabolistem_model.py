@@ -190,9 +190,9 @@ class TaboListem(object):
         # Get training and test sequences
         cr = CorpusReader(textfile, annotfile)
         train = cr.trainseqs
-        test = cr.testseqs
+        # test = cr.testseqs
 
-        seqs = train+test
+        seqs = train# +test
 
         # Initialise
         toklist = []
