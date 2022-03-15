@@ -127,9 +127,9 @@ class MetaboListem(object):
         # Get training and test sequences
         cr = CorpusReader(textfile, annotfile)
         train = cr.trainseqs
-        test = cr.testseqs
+        # test = cr.testseqs
 
-        seqs = train+test
+        seqs = train# +test
 
         # Initialise some stuff
         toklist = []
@@ -268,55 +268,7 @@ class MetaboListem(object):
             print("Trained at", datetime.now(), "Loss", totloss /
                   div, "Accuracy", totacc / div, file=sys.stderr)
             self.model.save("epoch_%s_%s.h5" % (epoch, runname))
-            # Evaluate
-            tp_all = 0
-            fp_all = 0
-            fn_all = 0
-            for i in range(len(test)):
-                enttype = None
-                entstart = 0
-                ts = test[i]
-                ents = [("E", i[2], i[3]) for i in ts["ents"]]
-                mm = model.predict(
-                    [np.array([ts["wordn"]]), np.array([ts["ni"]])])[0]
-
-                pseq = {}
-                pseq["tokens"] = ts["tokens"]
-                pseq["tokstart"] = ts["tokstart"]
-                pseq["tokend"] = ts["tokend"]
-                pseq["tagfeat"] = mm
-
-                pents, pxe = sobie_scores_to_char_ents(pseq, 0.5, ts["ss"])
-                tp = 0
-                fp = 0
-                fn = 0
-                tofind = set(ents)
-                for ent in pents:
-                    if ent in tofind:
-                        tp += 1
-                    else:
-                        fp += 1
-                fn = len(tofind) - tp
-                tp_all += tp
-                fp_all += fp
-                fn_all += fn
-
-            try:
-                f = (2*tp_all/(tp_all+tp_all+fp_all+fn_all))
-                print("TP", tp_all, "FP", fp_all, "FN", fn_all, "F", f, "Precision",
-                      tp_all/(tp_all+fp_all), "Recall", tp_all/(tp_all+fn_all), file=sys.stderr)
-            except (ZeroDivisionError):
-                print('No metabolite labelled.')
-                f = 0
-            if f > best_f:
-                print("Best so far", file=sys.stderr)
-                best_f = f
-                best_epoch = epoch
-
-        if best_epoch > -1:
-            shutil.copyfile("epoch_%s_%s.h5" %
-                            (best_epoch, runname), "metabolistem_%s.h5" % runname)
-
+            
     def load(self, jfile, mfile):
         """
         Load in model data.
