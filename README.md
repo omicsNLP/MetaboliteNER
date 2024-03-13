@@ -1,5 +1,3 @@
-[![DOI](https://zenodo.org/badge/407162055.svg)](https://zenodo.org/doi/10.5281/zenodo.10581588)
-
 # MetaboliteNER
 This repository contains the codes and models of a metabolite named entity recognition (NER) project. The main features you can find in this repository are as follows: 
 
@@ -10,6 +8,9 @@ This repository contains the codes and models of a metabolite named entity recog
 * MetaboListem, a machine learning model that recognises metabolite names (`metabolistem_model.py`), adapted from a chemical NER model named [ChemListem](https://bitbucket.org/rscapplications/chemlistem/src/master/);
 * TABoLiSTM, a [BERT](https://arxiv.org/abs/1810.04805)-based machine learning model that recognises metabolite names (`tabolistem_model.py`), adapted from MetaboListem.
 
+[![DOI](https://zenodo.org/badge/407162055.svg)](https://zenodo.org/doi/10.5281/zenodo.10581588)
+[![DOI:10.1101/2022.02.22.481457](http://img.shields.io/badge/DOI-10.1101/2022.02.22.481457-BE2536.svg)](https://doi.org/10.1101/2022.02.22.481457)
+[![DOI:10.3390/metabo12040276](http://img.shields.io/badge/DOI-10.3390/metabo12040276-074F57.svg)](https://doi.org/10.3390/metabo12040276)
 
 ## Dependencies
 This project is written in Python 3.7.10 and has been tested on Windows 10. Compatibility with other Python versions and systems have not been verified. 
