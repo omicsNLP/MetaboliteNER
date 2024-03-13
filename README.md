@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/407162055.svg)](https://zenodo.org/doi/10.5281/zenodo.10581588)
+
 # MetaboliteNER
 This repository contains the codes and models of a metabolite named entity recognition (NER) project. The main features you can find in this repository are as follows: 
 
